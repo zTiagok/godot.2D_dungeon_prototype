@@ -1,5 +1,4 @@
-class_name PlayerBehaviour extends EntityBehaviour
-
+class_name PlayerBehaviour extends CharacterBody2D
 
 @onready var animationPlayer : AnimationPlayer = $AnimationPlayer
 @onready var sprite : Sprite2D = $Sprite2D

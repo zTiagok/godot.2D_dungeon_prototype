@@ -1,8 +1,10 @@
 class_name Hurtbox extends Area2D
 
-signal isDamaged(damage: float)
+var entity : EntityBehaviour
 
+# Função utilizada para dizer que tomou o dano, no qual a Hitbox a encontra
+# através da detecção de colisão com a área do Hurtbox.
 func TakeDamage( damage: float ) -> void:
-	print("Took Damage: ", damage)
+	entity = get_parent()
 
-	isDamaged.emit(damage)
+	entity.TakeDamage(damage)

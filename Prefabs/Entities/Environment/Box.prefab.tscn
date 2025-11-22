@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8lro1c2nf02v"]
+[gd_scene load_steps=6 format=3 uid="uid://b8lro1c2nf02v"]
 
+[ext_resource type="Script" uid="uid://bxwokko8c0eng" path="res://Scripts/Entities/Environment/BoxBehaviour.script.gd" id="1_375bp"]
 [ext_resource type="Texture2D" uid="uid://dektpt2t2oicm" path="res://Assets/Pixel Art/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" id="1_fj7cf"]
 [ext_resource type="PackedScene" uid="uid://n2fu51jqshfg" path="res://Prefabs/Common/Hurtbox.prefab.tscn" id="2_b0ybr"]
 
@@ -9,8 +10,9 @@ size = Vector2(12, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_375bp"]
 size = Vector2(12, 3)
 
-[node name="Box" type="Node2D"]
+[node name="Box" type="StaticBody2D"]
 z_index = 1
+script = ExtResource("1_375bp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(8, -2)
@@ -27,12 +29,7 @@ position = Vector2(8, -2)
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_b0ybr")
 
-[node name="Collision" type="StaticBody2D" parent="."]
-position = Vector2(8, -2)
-collision_layer = 2
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
-position = Vector2(0, -1.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, -3.5)
 shape = SubResource("RectangleShape2D_375bp")
 debug_color = Color(0.94019616, 0.19174454, 0.39715213, 0.41960785)

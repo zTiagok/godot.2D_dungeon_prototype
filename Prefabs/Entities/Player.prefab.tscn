@@ -204,6 +204,7 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
 script = ExtResource("1_drjqj")
+movementSpeed = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
