@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://crxiijd7b8q0b"]
+[gd_scene load_steps=18 format=3 uid="uid://crxiijd7b8q0b"]
 
 [ext_resource type="Script" uid="uid://b8faxry758qft" path="res://Scripts/Entities/Player/PlayerBehaviour.script.gd" id="1_drjqj"]
 [ext_resource type="Texture2D" uid="uid://bpiygdi5v07ds" path="res://Assets/Pixel Art/Enemy_Animations_Set/enemies-skeleton1_idle.png" id="1_rmn78"]
 [ext_resource type="Texture2D" uid="uid://cecoiqavlff6e" path="res://Assets/Pixel Art/Enemy_Animations_Set/enemies-skeleton1_movement.png" id="2_8u032"]
+[ext_resource type="Resource" uid="uid://cdjxkrgl8a6tx" path="res://Resources/Entities/Player.resource.tres" id="2_hsghk"]
 [ext_resource type="Texture2D" uid="uid://olyn5m1rtb50" path="res://Assets/Pixel Art/Enemy_Animations_Set/enemies-skeleton1_attack.png" id="4_jluus"]
 [ext_resource type="Script" uid="uid://bknpxa8eis65w" path="res://Scripts/Entities/StateMachine.script.gd" id="4_u2ij1"]
 [ext_resource type="Script" uid="uid://q8ve806s2hm4" path="res://Scripts/Entities/Player/States/IdleState.script.gd" id="5_u2ij1"]
@@ -204,7 +205,7 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
 script = ExtResource("1_drjqj")
-movementSpeed = 100.0
+entity = ExtResource("2_hsghk")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true

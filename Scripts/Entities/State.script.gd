@@ -2,7 +2,7 @@
 class_name State extends Node
 
 var stateMachine: StateMachine
-var entity: EntityBehaviour
+var entity: CharacterBody2D
 
 func Enter() -> void:
 	pass

@@ -28,7 +28,7 @@ func Update(_delta: float) -> void:
 func PhysicsUpdate(_delta: float) -> void:	
 	# Checa se o Player está apertando uma das direções.
 	if player.currentDirection != Vector2.ZERO:
-		player.velocity = player.currentDirection * player.movementSpeed
+		player.velocity = player.currentDirection * player.entity.movementSpeed
 
 		# Habilita a física no player.
 		player.move_and_slide()

@@ -7,6 +7,7 @@ class_name PlayerBehaviour extends CharacterBody2D
 
 var currentDirection : Vector2
 var lastDirection : Vector2 = Vector2.RIGHT
+@export var entity : EntityResource
 
 
 func _process(_delta):
