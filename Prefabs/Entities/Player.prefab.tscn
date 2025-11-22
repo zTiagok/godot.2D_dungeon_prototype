@@ -1,0 +1,254 @@
+[gd_scene load_steps=17 format=3 uid="uid://crxiijd7b8q0b"]
+
+[ext_resource type="Script" uid="uid://b8faxry758qft" path="res://Scripts/Entities/Player/PlayerBehaviour.script.gd" id="1_drjqj"]
+[ext_resource type="Texture2D" uid="uid://bpiygdi5v07ds" path="res://Assets/Pixel Art/Enemy_Animations_Set/enemies-skeleton1_idle.png" id="1_rmn78"]
+[ext_resource type="Texture2D" uid="uid://cecoiqavlff6e" path="res://Assets/Pixel Art/Enemy_Animations_Set/enemies-skeleton1_movement.png" id="2_8u032"]
+[ext_resource type="Texture2D" uid="uid://olyn5m1rtb50" path="res://Assets/Pixel Art/Enemy_Animations_Set/enemies-skeleton1_attack.png" id="4_jluus"]
+[ext_resource type="Script" uid="uid://bknpxa8eis65w" path="res://Scripts/Entities/StateMachine.script.gd" id="4_u2ij1"]
+[ext_resource type="Script" uid="uid://q8ve806s2hm4" path="res://Scripts/Entities/Player/States/IdleState.script.gd" id="5_u2ij1"]
+[ext_resource type="Script" uid="uid://t2wr6658wvq5" path="res://Scripts/Entities/Player/States/MoveState.script.gd" id="6_n4e4o"]
+[ext_resource type="PackedScene" uid="uid://2v3s1rgdkkn6" path="res://Prefabs/Entities/DevelopmentHud.prefab.tscn" id="7_bjr5y"]
+[ext_resource type="Script" uid="uid://dhnfjsdi7wrl1" path="res://Scripts/Entities/Player/States/AttackState.script.gd" id="8_b5m6i"]
+[ext_resource type="AudioStream" uid="uid://ck78w4a4qbsas" path="res://Assets/Sounds/sword_swoosh.wav" id="9_dy6tl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bjr5y"]
+radius = 1.0
+height = 6.0
+
+[sub_resource type="Animation" id="Animation_b5m6i"]
+resource_name = "Attack"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_jluus")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.2, 0.3333333, 0.39999998, 0.46666664, 0.53333336),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 3, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StateMachine/Attack")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.33333334, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"AnimationPlayAttackAudio"
+}, {
+"args": [],
+"method": &"AnimationEndAttack"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_drjqj"]
+resource_name = "Idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_rmn78")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_u2ij1"]
+resource_name = "Walk"
+length = 0.95
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.13333334, 0.23333335, 0.3333333, 0.43333334, 0.53333336, 0.6333333, 0.7333333, 0.8333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_8u032")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="Animation" id="Animation_upey3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_rmn78")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n4e4o"]
+_data = {
+&"Attack": SubResource("Animation_b5m6i"),
+&"Idle": SubResource("Animation_drjqj"),
+&"Move": SubResource("Animation_u2ij1"),
+&"RESET": SubResource("Animation_upey3")
+}
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_drjqj")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 3.5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 10)
+texture = ExtResource("1_rmn78")
+offset = Vector2(3, -13)
+hframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 9)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_bjr5y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_n4e4o")
+}
+autoplay = "Idle"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+script = ExtResource("4_u2ij1")
+initialState = NodePath("Idle")
+metadata/_custom_type_script = "uid://bknpxa8eis65w"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("5_u2ij1")
+metadata/_custom_type_script = "uid://bkwwxkel8gvt0"
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource("6_n4e4o")
+metadata/_custom_type_script = "uid://bkwwxkel8gvt0"
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("8_b5m6i")
+attackSound = ExtResource("9_dy6tl")
+decelerateSpeed = 5.0
+metadata/_custom_type_script = "uid://bkwwxkel8gvt0"
+
+[node name="DevelopmentHUD" parent="." instance=ExtResource("7_bjr5y")]
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Audio"]
+
+[connection signal="stateChanged" from="StateMachine" to="DevelopmentHUD" method="SignalStateChanged"]
