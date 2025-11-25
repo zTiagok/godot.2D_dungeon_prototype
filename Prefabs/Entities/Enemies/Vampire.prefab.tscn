@@ -1,0 +1,172 @@
+[gd_scene load_steps=13 format=3 uid="uid://dwyop8ilbl417"]
+
+[ext_resource type="Texture2D" uid="uid://bcy41w55quciy" path="res://Assets/Pixel Art/Enemy_Animations_Set/enemies-vampire_idle.png" id="1_eib0o"]
+[ext_resource type="Script" uid="uid://bsrdptm8divbv" path="res://Scripts/Entities/Enemies/Vampire/VampireBehaviour.script.gd" id="1_vs8o1"]
+[ext_resource type="Texture2D" uid="uid://d1wjhr5x0745p" path="res://Assets/Pixel Art/Enemy_Animations_Set/enemies-vampire_movement.png" id="2_bv1rb"]
+[ext_resource type="Resource" uid="uid://binwbcepcby2p" path="res://Resources/Entities/Enemies/Vampire.resource.tres" id="2_nxfny"]
+[ext_resource type="Script" uid="uid://bknpxa8eis65w" path="res://Scripts/Entities/StateMachine.script.gd" id="3_4tev3"]
+[ext_resource type="Script" uid="uid://cyim1bo1ui6jp" path="res://Scripts/Entities/Enemies/Vampire/States/IdleState.script.gd" id="4_vs8o1"]
+[ext_resource type="Script" uid="uid://bn0y72lblx7l8" path="res://Scripts/Entities/Enemies/Vampire/States/MoveState.script.gd" id="7_7gfx8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bv1rb"]
+radius = 1.0
+height = 8.0
+
+[sub_resource type="Animation" id="Animation_eib0o"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_eib0o")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 5]
+}
+
+[sub_resource type="Animation" id="Animation_xi63e"]
+resource_name = "Move"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_bv1rb")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 7]
+}
+
+[sub_resource type="Animation" id="Animation_bv1rb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_eib0o")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xi63e"]
+_data = {
+&"Idle": SubResource("Animation_eib0o"),
+&"Move": SubResource("Animation_xi63e"),
+&"RESET": SubResource("Animation_bv1rb")
+}
+
+[node name="Vampire" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_vs8o1")
+entity = ExtResource("2_nxfny")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_eib0o")
+offset = Vector2(3, -13)
+hframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_bv1rb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xi63e")
+}
+autoplay = "Idle"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+script = ExtResource("3_4tev3")
+initialState = NodePath("Idle")
+metadata/_custom_type_script = "uid://bknpxa8eis65w"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_vs8o1")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource("7_7gfx8")

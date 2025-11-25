@@ -14,6 +14,9 @@ func Enter() -> void:
 	# Inicia a animação de ataque.
 	player.StartAnimation(self)
 
+	# Passa ao hitbox o dano atual do player para calcular o dano.
+	player.hitbox.damage = player.entity.currentDamage
+
 	# Altera a variável para que diga que o player está atacando.
 	isAttacking = true
 

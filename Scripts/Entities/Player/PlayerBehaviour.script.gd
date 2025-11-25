@@ -28,6 +28,7 @@ func _process(_delta):
 	if currentDirection != Vector2.ZERO:
 		lastDirection = currentDirection
 
+# Função utilizada dentro dos States, no qual chamam-no para trocar a animação.
 func StartAnimation(state: State) -> void:
 	# Inicia uma animação com base no nome do estado.
 	if state && animationPlayer:

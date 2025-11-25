@@ -238,6 +238,8 @@ entity = ExtResource("2_hsghk")
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 3.5
+editor_draw_limits = true
+editor_draw_drag_margin = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 10)
@@ -257,7 +259,6 @@ debug_color = Color(0.94019616, 0.19174454, 0.39715213, 0.41960785)
 
 [node name="Hitbox" parent="Interactions" instance=ExtResource("5_1ndts")]
 collision_mask = 16
-damage = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactions/Hitbox"]
 position = Vector2(7, 0)

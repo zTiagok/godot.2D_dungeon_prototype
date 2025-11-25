@@ -2,6 +2,8 @@ class_name Hitbox extends Area2D
 
 var entity : EntityResource
 
+var damage : float
+
 func _ready() -> void:
 	DisableHitbox()
 
@@ -21,5 +23,4 @@ func DisableHitbox() -> void:
 func SignalOnAreaEntered(area: Area2D) -> void:
 	# Se for um Hurtbox em contato...
 	if area is Hurtbox:
-		# area.TakeDamage(damage)
-		area.TakeDamage(1)
+		area.TakeDamage(damage)

@@ -9,10 +9,9 @@ func _ready() -> void:
 	assert(hurtbox, "Hurtbox is missing on the entity.")
 
 	# Conecta o sinal da Hurtbox na função abaixo.
-	hurtbox.DamageReceived.connect(TakeDamage)
+	hurtbox.DamageReceived.connect(OnDamaged)
 
-func TakeDamage(damage: float) -> void:
-	if damage >= entity.health:
+func OnDamaged(damage: float) -> void:
+	# Chama a função dentro do EntityResource, no qual verifica o dano e retorna o valor da vida atual.
+	if entity.TakeDamage(damage) <= 0:
 		queue_free()
-	else:
-		entity.health -= 1

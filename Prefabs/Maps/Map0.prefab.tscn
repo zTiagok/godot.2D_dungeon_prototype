@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://b6el3ss8in20b"]
+[gd_scene load_steps=11 format=4 uid="uid://b6el3ss8in20b"]
 
 [ext_resource type="PackedScene" uid="uid://crxiijd7b8q0b" path="res://Prefabs/Entities/Player.prefab.tscn" id="1_warvg"]
 [ext_resource type="Texture2D" uid="uid://dektpt2t2oicm" path="res://Assets/Pixel Art/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" id="2_lmvxk"]
 [ext_resource type="PackedScene" uid="uid://b8lro1c2nf02v" path="res://Prefabs/Entities/Environment/Box.prefab.tscn" id="3_3mt4j"]
+[ext_resource type="PackedScene" uid="uid://dwyop8ilbl417" path="res://Prefabs/Entities/Enemies/Vampire.prefab.tscn" id="4_k8ph3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lmvxk"]
 texture = ExtResource("2_lmvxk")
@@ -586,3 +587,6 @@ y_sort_origin = 1
 
 [node name="Box" parent="." instance=ExtResource("3_3mt4j")]
 position = Vector2(64, 48)
+
+[node name="Vampire" parent="." instance=ExtResource("4_k8ph3")]
+position = Vector2(48, 128)

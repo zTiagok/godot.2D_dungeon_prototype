@@ -6,6 +6,8 @@ class_name EntityResource extends Resource
 @export var canTakeDamage : bool = true
 
 # Função utilizada para todas as entidades para manipular o dano recebido.
-func TakeDamage(damage: float) -> void:
+func TakeDamage(damage: float) -> float:
   if (canTakeDamage):
     health -= damage
+
+  return health
