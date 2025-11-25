@@ -1,1 +1,1 @@
-class_name EnvironmentBoxBehaviour extends StaticBody2D
+class_name EnvironmentBoxBehaviour extends EnvironmentBehaviour

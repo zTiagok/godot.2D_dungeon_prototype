@@ -1,10 +1,25 @@
 class_name Hitbox extends Area2D
 
-@export var damage : float
+var entity : EntityResource
 
-# Quando uma área (Em especial a Hurtbox) entrar em contato, chamará a função.
-func SignalOnHit(area: Area2D) -> void:
+func _ready() -> void:
+	DisableHitbox()
 
-	# Se realmente for um Hurtbox em contato...
+# Utilizado no meio do AnimationPlayer para ativar a hitbox.
+func EnableHitbox() -> void:
+	self.monitoring = true
+	self.visible = true
+
+
+# Utilizado no meio do AnimationPlayer para desativar a hitbox.
+func DisableHitbox() -> void:
+	self.visible = false
+	self.monitoring = false
+
+
+# Quando uma outra área entrar em contato, chamará a função.
+func SignalOnAreaEntered(area: Area2D) -> void:
+	# Se for um Hurtbox em contato...
 	if area is Hurtbox:
-		area.TakeDamage()
+		# area.TakeDamage(damage)
+		area.TakeDamage(1)

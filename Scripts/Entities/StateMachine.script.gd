@@ -5,10 +5,11 @@ class_name StateMachine extends Node
 @export var initialState: State
 
 
-signal stateChanged
+signal StateChanged
 
 
 var currentState: State
+var lastState: State
 var states: Dictionary[String, State] = {}
 
 
@@ -54,8 +55,11 @@ func ChangeState(newStateName: String) -> void:
 	# ...para assim iniciar o novo state passado no parâmetro.
 	newState.Enter()
 
+	# Salva qual o último state utilizado.
+	lastState = currentState
+
 	# Após inicia-lo acima, irá salvar a variável como este novo state iniciado.
 	currentState = newState
 
 	# E irá emitir um sinal para todos os nodes conectados, dizendo que o state mudou.
-	emit_signal("stateChanged", newStateName)
+	StateChanged.emit(newStateName)

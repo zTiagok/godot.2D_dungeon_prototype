@@ -1,16 +1,24 @@
-[gd_scene load_steps=18 format=3 uid="uid://crxiijd7b8q0b"]
+[gd_scene load_steps=22 format=3 uid="uid://crxiijd7b8q0b"]
 
 [ext_resource type="Script" uid="uid://b8faxry758qft" path="res://Scripts/Entities/Player/PlayerBehaviour.script.gd" id="1_drjqj"]
 [ext_resource type="Texture2D" uid="uid://bpiygdi5v07ds" path="res://Assets/Pixel Art/Enemy_Animations_Set/enemies-skeleton1_idle.png" id="1_rmn78"]
 [ext_resource type="Texture2D" uid="uid://cecoiqavlff6e" path="res://Assets/Pixel Art/Enemy_Animations_Set/enemies-skeleton1_movement.png" id="2_8u032"]
 [ext_resource type="Resource" uid="uid://cdjxkrgl8a6tx" path="res://Resources/Entities/Player.resource.tres" id="2_hsghk"]
+[ext_resource type="PackedScene" uid="uid://n2fu51jqshfg" path="res://Prefabs/Common/Hurtbox.prefab.tscn" id="4_7evdl"]
 [ext_resource type="Texture2D" uid="uid://olyn5m1rtb50" path="res://Assets/Pixel Art/Enemy_Animations_Set/enemies-skeleton1_attack.png" id="4_jluus"]
 [ext_resource type="Script" uid="uid://bknpxa8eis65w" path="res://Scripts/Entities/StateMachine.script.gd" id="4_u2ij1"]
+[ext_resource type="PackedScene" uid="uid://t5bow7pas547" path="res://Prefabs/Common/Hitbox.prefab.tscn" id="5_1ndts"]
 [ext_resource type="Script" uid="uid://q8ve806s2hm4" path="res://Scripts/Entities/Player/States/IdleState.script.gd" id="5_u2ij1"]
 [ext_resource type="Script" uid="uid://t2wr6658wvq5" path="res://Scripts/Entities/Player/States/MoveState.script.gd" id="6_n4e4o"]
 [ext_resource type="PackedScene" uid="uid://2v3s1rgdkkn6" path="res://Prefabs/Entities/DevelopmentHud.prefab.tscn" id="7_bjr5y"]
 [ext_resource type="Script" uid="uid://dhnfjsdi7wrl1" path="res://Scripts/Entities/Player/States/AttackState.script.gd" id="8_b5m6i"]
 [ext_resource type="AudioStream" uid="uid://ck78w4a4qbsas" path="res://Assets/Sounds/sword_swoosh.wav" id="9_dy6tl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1ndts"]
+radius = 5.0990195
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6usrk"]
+height = 28.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bjr5y"]
 radius = 1.0
@@ -70,6 +78,26 @@ tracks/3/keys = {
 }, {
 "args": [],
 "method": &"AnimationEndAttack"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Interactions/Hitbox")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"DisableHitbox"
+}, {
+"args": [],
+"method": &"EnableHitbox"
+}, {
+"args": [],
+"method": &"DisableHitbox"
 }]
 }
 
@@ -217,7 +245,27 @@ texture = ExtResource("1_rmn78")
 offset = Vector2(3, -13)
 hframes = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Interactions" type="Node2D" parent="."]
+
+[node name="Hurtbox" parent="Interactions" instance=ExtResource("4_7evdl")]
+position = Vector2(0, 9)
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactions/Hurtbox"]
+shape = SubResource("CircleShape2D_1ndts")
+debug_color = Color(0.94019616, 0.19174454, 0.39715213, 0.41960785)
+
+[node name="Hitbox" parent="Interactions" instance=ExtResource("5_1ndts")]
+collision_mask = 16
+damage = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactions/Hitbox"]
+position = Vector2(7, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_6usrk")
+debug_color = Color(0.6117626, 0.5207436, 0.38928205, 0.41960785)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_bjr5y")
@@ -253,4 +301,4 @@ metadata/_custom_type_script = "uid://bkwwxkel8gvt0"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Audio"]
 
-[connection signal="stateChanged" from="StateMachine" to="DevelopmentHUD" method="SignalStateChanged"]
+[connection signal="StateChanged" from="StateMachine" to="DevelopmentHUD" method="SignalStateChanged"]

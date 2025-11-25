@@ -1,6 +1,7 @@
 class_name EntityResource extends Resource
 
 @export var health : float = 5.0
+@export var currentDamage : float = 0.0
 @export var movementSpeed : float = 0.0
 @export var canTakeDamage : bool = true
 
@@ -8,4 +9,3 @@ class_name EntityResource extends Resource
 func TakeDamage(damage: float) -> void:
   if (canTakeDamage):
     health -= damage
-    print(health)

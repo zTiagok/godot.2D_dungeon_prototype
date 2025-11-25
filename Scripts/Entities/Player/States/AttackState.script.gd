@@ -19,8 +19,13 @@ func Enter() -> void:
 
 
 func PhysicsUpdate(_delta: float) -> void:
-	# O player irá perder velocidade durante o state.
-	player.velocity -= player.velocity * decelerateSpeed *_delta
+	# Aplica uma redução de velocidade no player caso o último state fosse o "Move".
+	# Caso não, apenas bate parado.
+	if stateMachine.lastState.name == "Move":
+		# O player irá perder velocidade durante o state.
+		player.velocity -= player.velocity * decelerateSpeed *_delta
+	else:
+		player.velocity = Vector2.ZERO
 
 	# Habilita a física no player.
 	player.move_and_slide()

@@ -15,8 +15,10 @@ func Update(_delta: float) -> void:
 	# Flipa o sprite do Player dependendo da direção.
 	if player.lastDirection.x < 0:
 		player.sprite.scale.x = -1
+		player.hitbox.scale.x = -1
 	elif player.lastDirection.x > 0:
 		player.sprite.scale.x = 1
+		player.hitbox.scale.x = 1
 
 	# Altera o state do player quando ele atacar.
 	if Input.is_action_just_pressed("attack"):
