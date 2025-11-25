@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://t5bow7pas547" path="res://Prefabs/Common/Hitbox.prefab.tscn" id="5_1ndts"]
 [ext_resource type="Script" uid="uid://q8ve806s2hm4" path="res://Scripts/Entities/Player/States/IdleState.script.gd" id="5_u2ij1"]
 [ext_resource type="Script" uid="uid://t2wr6658wvq5" path="res://Scripts/Entities/Player/States/MoveState.script.gd" id="6_n4e4o"]
-[ext_resource type="PackedScene" uid="uid://2v3s1rgdkkn6" path="res://Prefabs/Entities/DevelopmentHud.prefab.tscn" id="7_bjr5y"]
+[ext_resource type="PackedScene" uid="uid://2v3s1rgdkkn6" path="res://Prefabs/Common/DevelopmentHud.prefab.tscn" id="7_bjr5y"]
 [ext_resource type="Script" uid="uid://dhnfjsdi7wrl1" path="res://Scripts/Entities/Player/States/AttackState.script.gd" id="8_b5m6i"]
 [ext_resource type="AudioStream" uid="uid://ck78w4a4qbsas" path="res://Assets/Sounds/sword_swoosh.wav" id="9_dy6tl"]
 

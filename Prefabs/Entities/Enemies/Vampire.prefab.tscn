@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dwyop8ilbl417"]
+[gd_scene load_steps=14 format=3 uid="uid://dwyop8ilbl417"]
 
 [ext_resource type="Texture2D" uid="uid://bcy41w55quciy" path="res://Assets/Pixel Art/Enemy_Animations_Set/enemies-vampire_idle.png" id="1_eib0o"]
 [ext_resource type="Script" uid="uid://bsrdptm8divbv" path="res://Scripts/Entities/Enemies/Vampire/VampireBehaviour.script.gd" id="1_vs8o1"]
@@ -6,7 +6,8 @@
 [ext_resource type="Resource" uid="uid://binwbcepcby2p" path="res://Resources/Entities/Enemies/Vampire.resource.tres" id="2_nxfny"]
 [ext_resource type="Script" uid="uid://bknpxa8eis65w" path="res://Scripts/Entities/StateMachine.script.gd" id="3_4tev3"]
 [ext_resource type="Script" uid="uid://cyim1bo1ui6jp" path="res://Scripts/Entities/Enemies/Vampire/States/IdleState.script.gd" id="4_vs8o1"]
-[ext_resource type="Script" uid="uid://bn0y72lblx7l8" path="res://Scripts/Entities/Enemies/Vampire/States/MoveState.script.gd" id="7_7gfx8"]
+[ext_resource type="PackedScene" uid="uid://2v3s1rgdkkn6" path="res://Prefabs/Common/DevelopmentHud.prefab.tscn" id="5_cq7ks"]
+[ext_resource type="Script" uid="uid://bn0y72lblx7l8" path="res://Scripts/Entities/Enemies/Vampire/States/WanderState.script.gd" id="7_7gfx8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bv1rb"]
 radius = 1.0
@@ -160,13 +161,20 @@ libraries = {
 }
 autoplay = "Idle"
 
+[node name="DevelopmentHUD" parent="." instance=ExtResource("5_cq7ks")]
+offset_top = -11.0
+offset_bottom = 29.0
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
 script = ExtResource("3_4tev3")
 initialState = NodePath("Idle")
 metadata/_custom_type_script = "uid://bknpxa8eis65w"
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState")]
 script = ExtResource("4_vs8o1")
+nextState = NodePath("../Wander")
 
-[node name="Move" type="Node" parent="StateMachine"]
+[node name="Wander" type="Node" parent="StateMachine"]
 script = ExtResource("7_7gfx8")
+
+[connection signal="StateChanged" from="StateMachine" to="DevelopmentHUD" method="SignalStateChanged"]

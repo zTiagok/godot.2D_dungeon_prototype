@@ -12,6 +12,9 @@ var lastDirection : Vector2 = Vector2.RIGHT
 @export var entity : EntityResource
 
 func _ready() -> void:
+	# Salva o Player em uma variável Global.
+	PlayerManager.player = self
+
 	# Conecta o sinal do Hurtbox para que o player tome dano.
 	hurtbox.DamageReceived.connect(TakeDamage)
 
