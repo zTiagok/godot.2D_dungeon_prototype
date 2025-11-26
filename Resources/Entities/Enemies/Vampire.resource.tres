@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_og2fg")
+health = 999.0
 currentDamage = 1.0
 movementSpeed = 80.0
 metadata/_custom_type_script = "uid://cffptblptj1cb"

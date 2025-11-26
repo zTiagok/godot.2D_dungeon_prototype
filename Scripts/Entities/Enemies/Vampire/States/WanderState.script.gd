@@ -2,10 +2,10 @@ extends State
 
 var enemy : EnemyBehaviour
 
+@export_category("AI")
 @export var stateDuration : float = 1.0
 @export var maxStateCycles : int = 3
 @export var minStateCycles : int = 1
-@export var nextState : State
 
 var timer : float = 0.0
 var direction : Vector2
@@ -19,8 +19,10 @@ func Enter() -> void:
 	# pela duração do estado.
 	timer = randf_range(minStateCycles, maxStateCycles) * stateDuration
 
-	# Seleciona uma direção aleatória.
-	direction = cardinalDirections[randf_range(0, 3)]
+	# Seleciona uma direção aleatória, podendo se movimentar em qualquer uma das
+	# 8 direções.
+	while (direction == Vector2.ZERO):
+		direction = Vector2(randi_range(-1, 1), randi_range(-1, 1))
 
 	# Pega a direção e multiplica sobre 1/3 da velocidade atual do Vampiro, para
 	# que ele fique percorrendo.

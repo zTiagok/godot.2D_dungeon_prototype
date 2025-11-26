@@ -5,6 +5,8 @@ var entity : EntityResource
 var damage : float
 
 func _ready() -> void:
+	# Salva os dados de dano da entidade.
+	entity = get_parent().get_parent().entity
 	DisableHitbox()
 
 # Utilizado no meio do AnimationPlayer para ativar a hitbox.
@@ -23,4 +25,4 @@ func DisableHitbox() -> void:
 func SignalOnAreaEntered(area: Area2D) -> void:
 	# Se for um Hurtbox em contato...
 	if area is Hurtbox:
-		area.TakeDamage(damage)
+		area.EmitDamage(entity.currentDamage, entity.knockbackForce)

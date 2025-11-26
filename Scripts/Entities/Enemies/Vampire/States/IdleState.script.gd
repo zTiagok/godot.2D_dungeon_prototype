@@ -5,7 +5,6 @@ var enemy: EnemyBehaviour
 @export_category("AI")
 @export var minStateDuration : float = 0.5
 @export var maxStateDuration : float = 1.5
-@export var nextState : State
 
 var timer : float = 0.0
 
@@ -27,6 +26,6 @@ func Update(_delta: float) -> void:
 	# Timer vai diminuindo a cada segundo.
 	timer -= _delta
 
-	# Quando o timer zerar, será alterado o state.
+	# Quando o timer zerar, será alterado para o state "Wander".
 	if timer <= 0:
-		stateMachine.ChangeState(nextState.name)
+		stateMachine.ChangeState("Wander")
